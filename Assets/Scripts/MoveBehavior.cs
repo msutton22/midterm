@@ -1,12 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoveBehavior : MonoBehaviour {
 
 public float moveSpeed = 10f;
 	public GameObject testcube;
+	public GameObject testcube2;
+	public GameObject testcube3;
+	private int countObjects = 0;
 
+	public Text countText;
 	public float lookSpeed = 300f;
 
 	private Vector3 inputVector; 
@@ -39,7 +44,9 @@ public float moveSpeed = 10f;
 	
 		
 		inputVector = transform.forward * vertical * moveSpeed; 
-		inputVector += transform.right * horizontal * moveSpeed; 
+		inputVector += transform.right * horizontal * moveSpeed;
+
+		countText.text = "Objects Collected: " + countObjects;
 	}
 
 	void FixedUpdate()
@@ -54,6 +61,19 @@ public float moveSpeed = 10f;
 		if (col.gameObject.tag == "cube")
 		{
 			Destroy(testcube);
+			countObjects++;
+		}
+
+		if (col.gameObject.tag == "cube2")
+		{
+			Destroy(testcube2);
+			countObjects++;
+		}
+		
+		if (col.gameObject.tag == "cube3")
+		{
+			Destroy(testcube3);
+			countObjects++;
 		}
 	}
 }
