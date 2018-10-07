@@ -10,9 +10,12 @@ public float moveSpeed = 10f;
 	public GameObject testcube2;
 	public GameObject testcube3;
 	private int countObjects = 0;
-
+	public GameObject futureCube;
+	public GameObject futureCube2;
+	private float timer = 0f;
 	public Text countText;
 	public float lookSpeed = 300f;
+	private int making = 0;
 
 	private Vector3 inputVector; 
 	
@@ -29,8 +32,10 @@ public float moveSpeed = 10f;
 	}
 
 	
-	void Update () {
-		
+	void Update ()
+	{
+
+		timer += Time.deltaTime;
 		float mouseX = Input.GetAxis("Mouse X") * lookSpeed * Time.deltaTime; 
 		float mouseY = Input.GetAxis("Mouse Y") * lookSpeed * Time.deltaTime; 
 
@@ -47,6 +52,22 @@ public float moveSpeed = 10f;
 		inputVector += transform.right * horizontal * moveSpeed;
 
 		countText.text = "Objects Collected: " + countObjects;
+
+		int newTime = Mathf.RoundToInt(timer);
+
+		if (newTime == 15 && making == 0)
+		{
+			futureCube.SetActive(true);
+			making++;
+
+		}
+
+		if (newTime == 25 && making == 1)
+		{
+			futureCube2.SetActive(true);
+			making++;
+		}
+		
 	}
 
 	void FixedUpdate()
@@ -73,6 +94,18 @@ public float moveSpeed = 10f;
 		if (col.gameObject.tag == "cube3")
 		{
 			Destroy(testcube3);
+			countObjects++;
+		}
+
+		if (col.gameObject.tag == "cube4")
+		{
+			Destroy(futureCube);
+			countObjects++;
+		}
+		
+		if (col.gameObject.tag == "cube5")
+		{
+			Destroy(futureCube2);
 			countObjects++;
 		}
 	}
