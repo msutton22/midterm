@@ -12,6 +12,7 @@ public float moveSpeed = 10f;
 	private int countObjects = 0;
 	public GameObject futureCube;
 	public GameObject futureCube2;
+	public GameObject drowner;
 	private float timer = 0f;
 	public Text countText;
 	public float lookSpeed = 300f;
@@ -65,6 +66,12 @@ public float moveSpeed = 10f;
 		if (newTime == 25 && making == 1)
 		{
 			futureCube2.SetActive(true);
+			making++;
+		}
+
+		if (newTime == 30 && making == 2)
+		{
+			drowner.SetActive(true);
 			making++;
 		}
 		
