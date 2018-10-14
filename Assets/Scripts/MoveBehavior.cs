@@ -170,6 +170,11 @@ public float moveSpeed = 10f;
 			Destroy(futureCube2);
 			countObjects++;
 		}
+		
+		if (col.gameObject.tag == "drowner")
+		{
+			SceneManager.LoadScene(2);
+		}
 	}
 
 

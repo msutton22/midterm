@@ -399,7 +399,7 @@ GameObject:
   - component: {fileID: 262782309}
   m_Layer: 0
   m_Name: Drowner
-  m_TagString: Untagged
+  m_TagString: drowner
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
