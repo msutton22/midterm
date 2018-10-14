@@ -74,7 +74,7 @@ public float moveSpeed = 10f;
 			SceneManager.LoadScene(1);
 		}
 
-		if (Input.GetKey(KeyCode.Y))
+		if (countObjects != 5 && Input.GetKey(KeyCode.Y))
 		{
 			timeToYell = 20f;
 		}
@@ -114,11 +114,11 @@ public float moveSpeed = 10f;
 		if (making == 2 && countObjects == 5)
 		{
 			drowner.SetActive(true);
-			helpMe.text = "There's a child drowning! Press 'Space' to save them!";
-			badkidText.text = "  ";
+			helpMe.text = "There's a child drowning! Press 'Space' to jump in and save them!";
+			badkidText.text = "Time Until Kid Will Drown: " +  Mathf.RoundToInt(timeToYell) + " Seconds";
 			countText.text = " ";
 			pressY.text = " ";
-			timeToYell = 100f;
+			timeToYell = 50f;
 			making++;
 			
 		
