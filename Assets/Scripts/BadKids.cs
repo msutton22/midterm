@@ -31,4 +31,6 @@ public class BadKids : MonoBehaviour
 			timeToYell = 20f;
 		}
 	}
+	
+	
 }

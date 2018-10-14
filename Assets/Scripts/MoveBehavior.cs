@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class MoveBehavior : MonoBehaviour {
@@ -17,6 +18,13 @@ public float moveSpeed = 10f;
 	public Text countText;
 	public float lookSpeed = 300f;
 	private int making = 0;
+	public Text helpMe;
+	private float timeToYell = 20f;
+	public Text badkidText;
+	public Text pressY;
+	public float jumpForce = 2.0f;
+	private Rigidbody rb;
+	public Vector3 jump;
 
 	private Vector3 inputVector; 
 	
@@ -25,6 +33,14 @@ public float moveSpeed = 10f;
 	public static float globalGravity = -9.81f;
  
 	Rigidbody rBody;
+
+	void Start()
+	{
+		rb = GetComponent<Rigidbody>();
+		jump = new Vector3(0f, 2f, 0f);
+		helpMe.text = "";
+		pressY.text = "Press Y to Yell at Kids";
+	}
  
 	void OnEnable ()
 	{
@@ -35,7 +51,34 @@ public float moveSpeed = 10f;
 	
 	void Update ()
 	{
+		if (Input.GetKeyDown("space"))
+		{
+			Debug.Log("jump");
+			//rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+			//transform.Translate(Vector3.up * 260 * Time.deltaTime, Space.World);
+			gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up,ForceMode.Impulse);
 
+		}
+		
+		timeToYell -= Time.deltaTime;
+		if (countObjects != 5)
+		{
+			badkidText.text = "Time Until You Should Yell At Kids: " + Mathf.RoundToInt(timeToYell) + " Seconds";
+			countText.text = "Objects Collected: " + countObjects;
+
+		}
+		
+		
+		if (timeToYell < 0f)
+		{
+			SceneManager.LoadScene(1);
+		}
+
+		if (Input.GetKey(KeyCode.Y))
+		{
+			timeToYell = 20f;
+		}
+	
 		timer += Time.deltaTime;
 		float mouseX = Input.GetAxis("Mouse X") * lookSpeed * Time.deltaTime; 
 		float mouseY = Input.GetAxis("Mouse Y") * lookSpeed * Time.deltaTime; 
@@ -52,7 +95,6 @@ public float moveSpeed = 10f;
 		inputVector = transform.forward * vertical * moveSpeed; 
 		inputVector += transform.right * horizontal * moveSpeed;
 
-		countText.text = "Objects Collected: " + countObjects;
 
 		int newTime = Mathf.RoundToInt(timer);
 
@@ -69,10 +111,23 @@ public float moveSpeed = 10f;
 			making++;
 		}
 
-		if (newTime == 30 && making == 2)
+		if (making == 2 && countObjects == 5)
 		{
 			drowner.SetActive(true);
+			helpMe.text = "There's a child drowning! Press 'Space' to save them!";
+			badkidText.text = "  ";
+			countText.text = " ";
+			pressY.text = " ";
+			timeToYell = 100f;
 			making++;
+			
+		
+		}
+		
+		if ( countObjects == 5 && Input.GetKeyDown(KeyCode.Space))
+		{
+			Debug.Log("space");
+			transform.Translate(0f, 2f, 0f);
 		}
 		
 	}
@@ -116,5 +171,7 @@ public float moveSpeed = 10f;
 			countObjects++;
 		}
 	}
+
+
 }
 
