@@ -122,6 +122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 10953522}
   - component: {fileID: 10953521}
+  - component: {fileID: 10953523}
   - component: {fileID: 10953520}
   m_Layer: 0
   m_Name: Main Camera
@@ -190,6 +191,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &10953523
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 10953519}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26ee375b021124d2cae888830844fe0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &31877127
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,11 +397,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'You Saved a Drowning Kid!
-
-    Sure, it was a boring day but you made it through.
-
-    Tomorrow is a new day!'
+  m_Text: "You Saved a Drowning Kid!\nSure, it was a boring day but you made it through.\nTomorrow
+    is a new day! \nPress 'Space' to play again"
 --- !u!222 &957721434
 CanvasRenderer:
   m_ObjectHideFlags: 0

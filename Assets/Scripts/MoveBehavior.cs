@@ -22,9 +22,7 @@ public float moveSpeed = 10f;
 	private float timeToYell = 20f;
 	public Text badkidText;
 	public Text pressY;
-	public float jumpForce = 2.0f;
-	private Rigidbody rb;
-	public Vector3 jump;
+	private float timeToYell2 = 100f;
 
 	private Vector3 inputVector; 
 	
@@ -36,8 +34,7 @@ public float moveSpeed = 10f;
 
 	void Start()
 	{
-		rb = GetComponent<Rigidbody>();
-		jump = new Vector3(0f, 2f, 0f);
+
 		helpMe.text = "";
 		pressY.text = "Press Y to Yell at Kids";
 	}
@@ -54,22 +51,33 @@ public float moveSpeed = 10f;
 		if (Input.GetKeyDown("space"))
 		{
 			Debug.Log("jump");
-			//rb.AddForce(jump * jumpForce, ForceMode.Impulse);
-			//transform.Translate(Vector3.up * 260 * Time.deltaTime, Space.World);
 			gameObject.GetComponent<Rigidbody>().AddForce(Vector3.up,ForceMode.Impulse);
 
 		}
 		
 		timeToYell -= Time.deltaTime;
+		timeToYell2 -= Time.deltaTime;
 		if (countObjects != 5)
 		{
 			badkidText.text = "Time Until You Should Yell At Kids: " + Mathf.RoundToInt(timeToYell) + " Seconds";
 			countText.text = "Objects Collected: " + countObjects;
 
 		}
+
+		if (countObjects == 5)
+		{
+			badkidText.text = "Time Until Kid Will Drown: " + Mathf.RoundToInt(timeToYell2) + " Seconds!";
+
+		}
 		
 		
-		if (timeToYell < 0f)
+		if (timeToYell < 0f )
+		{
+			SceneManager.LoadScene(1);
+		}
+		
+		
+		if (timeToYell2 < 0f )
 		{
 			SceneManager.LoadScene(1);
 		}
@@ -113,16 +121,19 @@ public float moveSpeed = 10f;
 
 		if (making == 2 && countObjects == 5)
 		{
+			timeToYell2 = 10f;
 			drowner.SetActive(true);
 			helpMe.text = "There's a child drowning! Press 'Space' to jump in and save them!";
-			badkidText.text = "Time Until Kid Will Drown: " +  Mathf.RoundToInt(timeToYell) + " Seconds";
 			countText.text = " ";
 			pressY.text = " ";
-			timeToYell = 50f;
 			making++;
-			
-		
+
+
 		}
+		
+
+	
+
 		
 		if ( countObjects == 5 && Input.GetKeyDown(KeyCode.Space))
 		{
