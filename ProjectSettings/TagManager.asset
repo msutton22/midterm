@@ -10,6 +10,14 @@ TagManager:
   - cube4
   - cube5
   - drowner
+  - cube6
+  - cube7
+  - water
+  - person1
+  - person2
+  - person3
+  - person4
+  - person5
   layers:
   - Default
   - TransparentFX
